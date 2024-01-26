@@ -17,7 +17,7 @@ const Projects = () => {
                     {
                         projects.map((project, index) => (
                             <div className='cursor-pointer py-5 width' onClick={() => setProjectIndex(index)}>
-                                <h1 className={`px-5 min-w-56 text-2xl sm:text-[16px] sm:w-[27vw] content-center ${projectIndex === index ? 'text-tertiary border-tertiary border-l-4 ml-[-3px] bg-[#c9cfd0]' : 'text-white'}`}>{project.title}</h1>
+                                <h1 className={`px-5 min-w-56 text-2xl sm:text-[16px] sm:w-[27vw] content-center ${projectIndex === index ? 'text-tertiary border-tertiary border-l-4 ml-[-3px] bg-[#242285]' : 'text-white'}`}>{project.title}</h1>
                             </div>
                         ))
                     }
@@ -41,7 +41,7 @@ const Projects = () => {
                                 }
                             </div>
                             <div className='mt-4'>
-                                <a href={projects[projectIndex].link} target='_blank'><h1 className='flex text-tertiary underline cursor-pointer'>Click Here</h1></a>
+                                <a href={projects[projectIndex].link} target='_blank'><h1 className='flex text-tertiary underline cursor-pointer font-sans font-bold text-xl'>Click Here</h1></a>
                             </div>
 
                         </div>

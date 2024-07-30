@@ -9,7 +9,14 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://market-sphere-frontend.vercel.app",
+    credentials: true,
+  })
+);
 app.use("/api/portfolio", portfolioRoute);
 
 const port = process.env.PORT || 5000;

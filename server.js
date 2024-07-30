@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://market-sphere-frontend.vercel.app",
+    origin: "https://portfolio-me-r8xa.vercel.app/",
     credentials: true,
   })
 );

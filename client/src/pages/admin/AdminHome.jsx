@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import AdminProjects from './AdminProjects'
 import AdminContact from './AdminContact'
 import AdminEducation from './AdminEducation'
+import AdminExperience from './AdminExperience.jsx'
 
 
 
@@ -45,10 +46,13 @@ const AdminHome = () => {
                             <TabPane tab='Education' key='3'>
                                 <AdminEducation />
                             </TabPane>
-                            <TabPane tab='Projects' key='4'>
+                            <TabPane tab='Experience' key='4'>
+                                <AdminExperience />
+                            </TabPane>
+                            <TabPane tab='Projects' key='5'>
                                 <AdminProjects />
                             </TabPane>
-                            <TabPane tab='Contact' key='5'>
+                            <TabPane tab='Contact' key='6'>
                                 <AdminContact />
                             </TabPane>
                         </Tabs>

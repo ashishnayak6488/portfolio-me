@@ -3,6 +3,7 @@ import Header from '../../components/Header'
 import Intro from './Intro'
 import About from './About'
 import Education from './Education'
+import Experience from './Experience.jsx'
 import Projects from './Projects'
 import Contact from './Contact'
 import Footer from './Footer'
@@ -23,6 +24,7 @@ const Home = () => {
                         <Intro />
                         <About />
                         <Education />
+                        <Experience />
                         <Projects />
                         <Contact />
                         <Footer />

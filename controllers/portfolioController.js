@@ -6,22 +6,25 @@ const {
   Education,
   Project,
   Contact,
+  Experience,
 } = require("../model/portfolioModel");
 
-const User = require('../model/userModel')
+const User = require("../model/userModel");
 
 const getPortfolioData = async (req, res, next) => {
   try {
     const intros = await Intro.find();
     const abouts = await About.find();
-    const educations = await Education.find();
-    const projects = await Project.find();
+    const educations = await Education.find().sort({ createdAt: -1 });
+    const experiences = await Experience.find().sort({ createdAt: -1 });
+    const projects = await Project.find().sort({ createdAt: -1 });
     const contacts = await Contact.find();
 
     return res.status(200).json({
       intro: intros[0],
       about: abouts[0],
       educations: educations,
+      experiences: experiences,
       projects: projects,
       contact: contacts[0],
     });
@@ -131,6 +134,60 @@ const deleteEducation = async (req, res) => {
 
 // Add Projects
 
+const addExperience = async (req, res) => {
+  try {
+    const experience = new Experience(req.body);
+    await experience.save();
+
+    return res.status(200).json({
+      data: experience,
+      success: true,
+      message: "Experience Added Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+//Update Project Section
+
+const updateExperience = async (req, res) => {
+  try {
+    const experience = await Experience.findOneAndUpdate(
+      { _id: req.body._id },
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    return res.status(200).json({
+      data: experience,
+      success: true,
+      message: "Experience Updated Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+//delete Project Section
+
+const deleteExperience = async (req, res) => {
+  try {
+    const experience = await Experience.findOneAndDelete({ _id: req.body._id });
+
+    return res.status(200).json({
+      data: experience,
+      success: true,
+      message: "Experience Deleted Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+// Add Projects
+
 const addProject = async (req, res) => {
   try {
     const project = new Project(req.body);
@@ -184,7 +241,6 @@ const deleteProject = async (req, res) => {
   }
 };
 
-
 //Update intro Section
 
 const updateContact = async (req, res) => {
@@ -207,34 +263,32 @@ const updateContact = async (req, res) => {
   }
 };
 
-
 //admin-login
 
 const adminLogin = async (req, res) => {
   try {
-    const user = await User.findOne({username: req.body.username , password: req.body.password});
+    const user = await User.findOne({
+      username: req.body.username,
+      password: req.body.password,
+    });
     user.password = "";
     if (user) {
-        return res.status(200).json({
-          data: user,
-          success: true,
-          message: "Login Successfully",
-        });
-    }
-    else{
+      return res.status(200).json({
+        data: user,
+        success: true,
+        message: "Login Successfully",
+      });
+    } else {
       return res.status(404).json({
-          data: user,
-          success: false,
-          message: "Invalid Username / Password",
-        });
+        data: user,
+        success: false,
+        message: "Invalid Username / Password",
+      });
     }
-
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
-
-
 
 module.exports = {
   getPortfolioData,
@@ -243,9 +297,12 @@ module.exports = {
   addEducation,
   updateEducation,
   deleteEducation,
+  addExperience,
+  updateExperience,
+  deleteExperience,
   addProject,
   updateProject,
   deleteProject,
   updateContact,
-  adminLogin
+  adminLogin,
 };
